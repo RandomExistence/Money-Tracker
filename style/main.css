@@ -97,7 +97,7 @@ body {
 }
 
 .today-total-exceed-span {
-  color: red;
+  color: rgb(176, 29, 29);
 }
 
 .view-history-button {
