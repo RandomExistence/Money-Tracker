@@ -1,4 +1,4 @@
-let dailyEarn = 250;
+export let dailyEarn = 250;
 export let productToday = JSON.parse(localStorage.getItem('productToday')) || [];
 export let yesterdayMonthTotal = JSON.parse(localStorage.getItem('yesterdayMonthTotal')) || 0;
 export let monthMaxTotal = JSON.parse(localStorage.getItem('monthMaxTotal')) || 0;
