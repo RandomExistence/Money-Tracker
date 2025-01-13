@@ -36,8 +36,9 @@ if (recDay.getDate() != today.getDate()) {
     document.querySelector('.js-login-body-div').classList.add('hide-login-body-div');
     document.querySelector('.js-main-body-div').classList.remove('hide-main-body-div');
     console.log(recDay);
-    updateMonthMaxAndYesterday();
     localStorage.setItem('recDay', today.toISOString());
+    updateMonthMaxAndYesterday();
+    updateProductHistory()
     removeProductTodayArray();
     renderProductPriceGrid();
     renderMonthTotal();
