@@ -3,9 +3,9 @@ import { formatDate } from "./utils/dateFormat.js";
 import { updateProductHistory } from "./history/arrayLogic.js"; 
 
 let today = new Date();
-let recDay;
+let recDay = today;
 if (!localStorage.getItem('recDay')) {
-  recDay = today;
+  recDay.setDate(today.getDate() - 1);
 } else {
   recDay = new Date(localStorage.getItem('recDay'));
 }
