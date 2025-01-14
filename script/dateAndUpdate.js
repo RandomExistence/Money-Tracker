@@ -1,5 +1,6 @@
 import { renderProductPriceGrid, renderTodayTotal, updateMonthMaxAndYesterday, renderMonthTotal, renderLoginMonthTotal, removeProductTodayArray, productToday } from "./spending.js";
 import { formatDate } from "./utils/dateFormat.js";
+import { updateProductHistory } from "./history/arrayLogic.js"; 
 
 let today = new Date();
 let recDay;
@@ -9,7 +10,7 @@ if (!localStorage.getItem('recDay')) {
   recDay = new Date(localStorage.getItem('recDay'));
 }
 
-document.querySelector('.view-history-button').addEventListener('click', () => {
+document.querySelector('.js-view-history-button').addEventListener('click', () => {
   window.location.href = 'history.html';
 });
 
@@ -38,7 +39,7 @@ if (recDay.getDate() != today.getDate()) {
     console.log(recDay);
     localStorage.setItem('recDay', today.toISOString());
     updateMonthMaxAndYesterday();
-    updateProductHistory()
+    updateProductHistory();
     removeProductTodayArray();
     renderProductPriceGrid();
     renderMonthTotal();
