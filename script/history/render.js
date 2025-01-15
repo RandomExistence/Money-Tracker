@@ -7,19 +7,19 @@ function renderHistory() {
   
   productHistory.forEach((monthHistory, index) => {
     historyMainHTML += `
-    <button class="expand-button js-expand-button" data-index="${index}">expand</button>
-    <div class="record-date">${monthHistory.date}</div>
-    <div class="record-value">${monthHistory.totalPrice} / ${monthHistory.maxPrice}</div>
-    <div class="expand-month-history hidden js-expand-month-history-${index}" data-rendered="false"></div>
-    <br>
+      <button class="expand-button js-expand-button js-expand-button-${index}" data-index="${index}">+</button>
+      <div class="record-date">${monthHistory.date}</div>
+      <div class="record-value">${monthHistory.totalPrice} / ${monthHistory.maxPrice}</div>
+      <div class="expand-month-history hidden js-expand-month-history-${index}" data-rendered="false"></div>
+      <div class="newliner-div"></div>
     `;
   });
   document.querySelector('.js-main-history-body-div').innerHTML = historyMainHTML;
   
   document.querySelectorAll('.js-expand-button').forEach((button) => {
     button.addEventListener('click', () => {
-      // expand the history
       toggleHistoryExpand(Number(button.dataset.index));
+      renderExpandButton(button.dataset.index);
     });
   });
 }
@@ -34,16 +34,42 @@ function toggleHistoryExpand(index) {
   }
   if (isRendered == "false") {
     let gridHistory = ``;
+    gridHistory += `
+      <div class="history-expand-header-product">Product Name</div>
+      <div class="history-expand-header-price">Price</div>
+    `;
+    if (productHistory[index].thisMonthHistory.length == 0) {
+      gridHistory += `
+        <div>No Product Recorded</div>
+        <div></div>
+      `;
+    }
+
     productHistory[index].thisMonthHistory.forEach((product) => {
       gridHistory += `
-        <div>${product.name} ${product.price}</div>
+        <div>${product.name}</div>
+        <div>${product.price}</div>
       `;
     });
+
+    gridHistory += `
+      <div class="horizontal-line-div"></div>
+      <div></div>
+    `;
     console.log("render");
     thisGrid.innerHTML = gridHistory;
     thisGrid.dataset.rendered = "true";
   }
   thisGrid.classList.remove('hidden');
+}
+
+function renderExpandButton(index) {
+  const thisButton = document.querySelector(`.js-expand-button-${index}`);
+  if (thisButton.innerHTML == '+') {
+    thisButton.innerHTML = '-';
+  } else {
+    thisButton.innerHTML = '+';
+  }
 }
 
 
