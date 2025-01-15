@@ -38,12 +38,16 @@ if (recDay.getDate() != today.getDate()) {
     document.querySelector('.js-main-body-div').classList.remove('hide-main-body-div');
     console.log(recDay);
     localStorage.setItem('recDay', today.toISOString());
-    updateMonthMaxAndYesterday();
-    updateProductHistory();
-    removeProductTodayArray();
-    renderProductPriceGrid();
-    renderMonthTotal();
-    renderTodayTotal();
+    try {
+      updateMonthMaxAndYesterday();
+      updateProductHistory();
+      removeProductTodayArray();
+      renderProductPriceGrid();
+      renderMonthTotal();
+      renderTodayTotal();
+    } catch (error) {
+      console.log(error);
+    }
   });
   
 } else {
