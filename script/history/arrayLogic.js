@@ -33,7 +33,7 @@ export let productHistory = JSON.parse(localStorage.getItem('productHistory')) |
         price: 20
       },
       {
-        name: 'pencil',
+        name: 'pencil case of great glitter',
         price: 20
       }
     ]
@@ -45,7 +45,7 @@ export function updateProductHistory() {
   console.log('hello again');
   let yesterdayTotal = 0;
   productToday.forEach((product) => {
-    productHistory[0].thisMonthHistory.add({
+    productHistory[0].thisMonthHistory.push({
       name: product.name,
       price: product.price
     });
