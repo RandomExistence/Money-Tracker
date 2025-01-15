@@ -81,6 +81,7 @@ body {
 .edit-button,
 .add-button,
 .save-button {
+  color: black;
   cursor: pointer;
   background-color: antiquewhite;
   border: solid;
