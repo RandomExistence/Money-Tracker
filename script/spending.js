@@ -9,14 +9,14 @@ export function renderProductPriceGrid() {
     gridHTML += `
       <div class="product-value js-product-value-${index}">${productDetail.name}</div>
       <div class="price-value js-price-value-${index}">${productDetail.price}</div>
-      <button class="edit-button js-edit-button" data-index="${index}">edit</button>
+      <button class="main-button third-column js-edit-button" data-index="${index}">edit</button>
     `;
   });
 
   gridHTML += `
-    <input class="add-product-input js-add-product-input">
-    <input class="add-price-input js-add-price-input">
-    <button class="add-button js-add-button">add</button>
+    <input class="main-input js-add-product-input">
+    <input class="main-input js-add-price-input">
+    <button class="main-button third-column js-add-button">add</button>
   `;
 
   document.querySelector('.js-product-price-gird').innerHTML = gridHTML;
@@ -41,19 +41,19 @@ export function renderProductPriceGrid() {
       const product = document.querySelector(`.js-product-value-${button.dataset.index}`);
       const price = document.querySelector(`.js-price-value-${button.dataset.index}`);
       product.outerHTML = `
-        <input class="product-input js-product-input" value="${product.innerHTML}">
+        <input class="main-input js-product-input" value="${product.innerHTML}">
       `;
       price.outerHTML = `
-        <input class="price-input js-price-input" value="${Number(price.innerHTML)}">
+        <input class="main-input js-price-input" value="${Number(price.innerHTML)}">
       `;
       
       button.outerHTML = `
-        <button class="save-button js-save-button">save</button>
+        <button class="main-button third-column js-save-button">save</button>
       `;
 
       document.querySelectorAll('.js-edit-button').forEach((button) => {
         button.outerHTML = `
-          <div class="is-editing-div"></div>
+          <div class="third-column"></div>
         `;
       });
 
@@ -107,6 +107,7 @@ export function renderMonthTotal() {
   1 : make a variable keeping the tally
   2 : make an array keeping the product
   */
+ // is debatable for whether you wanna change it or not
   let todayTotal = 0;
   productToday.forEach((product) => {
     todayTotal += product.price;
@@ -125,6 +126,9 @@ export function renderLoginMonthTotal() {
   const currentMonthTotal = yesterdayMonthTotal + yesterdayTotal;
   document.querySelector('.js-total-login-month').innerHTML = `
      ${currentMonthTotal} / ${monthMaxTotal}
+  `
+  document.querySelector('.js-daily-earn-div').innerHTML = `
+    You will be given ${dailyEarn} Baht
   `
 }
 
@@ -153,6 +157,7 @@ export function renderTodayTotal() {
 
   document.querySelector('.js-today-total-value').innerHTML = `
     <span class="js-today-total-span">${total}</span> / ${dailyEarn}
+    <div class="tomorrow-daily-earn">(tmr. +${dailyEarn}) </div>
   `;
   if (total > dailyEarn) {
     document.querySelector('.js-today-total-span').classList.add('today-total-exceed-span');

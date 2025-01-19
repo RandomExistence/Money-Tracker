@@ -4,13 +4,16 @@ body {
   background-color: rgb(201, 158, 106);
 }
 
-.hide-main-body-div,
-.hide-login-body-div {
+.hidden {
   display: none;
 }
 
 .login-body-div {
   font-size: 13px;
+}
+
+.daily-earn-div {
+  margin-bottom: 10px;
 }
 
 .total-money-div {
@@ -19,10 +22,14 @@ body {
 .month-total,
 .month-total-value,
 .today-total,
-.today-total-value {
+.today-total-value,
+.tomorrow-daily-earn {
   display: inline;
 }
 
+.tomorrow-daily-earn {
+  font-size: 12px;
+}
 .product-head-price-grid {
   font-size: 12px;
   display: grid;
@@ -62,25 +69,17 @@ body {
 }
 
 
-.add-product-input,
-.add-price-input,
-.product-input,
-.price-input {
+.main-input {
   font-size: 12px;
   height: 14px;
 }
-.save-button,
-.is-editing-div,
-.edit-button,
-.add-button {
+.third-column {
   font-size: 12px;
   width: 40px;
   height: 20px;
 }
 
-.edit-button,
-.add-button,
-.save-button {
+.main-button {
   color: black;
   cursor: pointer;
   background-color: antiquewhite;
@@ -90,11 +89,29 @@ body {
   transition: 80ms;
 }
 
-.edit-button:hover,
-.save-button:hover,
-.add-button:hover {
+.main-button:hover {
   background-color: rgb(117, 75, 20);
   color: white;
+}
+
+.login-view-history-button {
+  color: rgb(224, 224, 224);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 2px 5px;
+  border: solid;
+  border-color: rgb(151, 127, 109);
+  background-color: rgb(151, 127, 109);
+  transition: 100ms;
+}
+.login-view-history-button:hover {
+  color: white;
+  border-color: rgb(84, 74, 67);
+  background-color: rgb(84, 74, 67);
+}
+.login-view-history-button:active {
+  transition: 50ms;
+  color: rgb(84, 74, 67);
 }
 
 .today-total-exceed-span {

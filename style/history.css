@@ -11,12 +11,14 @@ h2 {
 }
 
 .expand-button {
+  cursor: pointer;
   display: relative;
   background: none;
   border: solid;
   width: 21px;
   height: 21px;
-  border-radius: 3px;
+  border-radius: 50%;
+  font-weight: 500;
   color: rgb(255, 247, 243);
   border-color: rgb(255, 247, 243);
   transition: 200ms;

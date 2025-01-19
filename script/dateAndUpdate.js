@@ -6,11 +6,15 @@ let today = new Date();
 let recDay = today;
 if (!localStorage.getItem('recDay')) {
   recDay.setDate(today.getDate() - 1);
+  console.log(`this is today ${today}`);
 } else {
   recDay = new Date(localStorage.getItem('recDay'));
 }
 
 document.querySelector('.js-view-history-button').addEventListener('click', () => {
+  window.location.href = 'history.html';
+});
+document.querySelector('.js-login-view-history-button').addEventListener('click', () => {
   window.location.href = 'history.html';
 });
 
@@ -23,8 +27,8 @@ if (recDay.getMonth() != today.getMonth()) {
 
 if (recDay.getDate() != today.getDate()) {
   // this is stinky af, help I can't breathe
-  document.querySelector('.js-main-body-div').classList.add('hide-main-body-div');
-  document.querySelector('.js-login-body-div').classList.remove('hide-login-body-div');
+  document.querySelector('.js-main-body-div').classList.add('hidden');
+  document.querySelector('.js-login-body-div').classList.remove('hidden');
   renderLoginMonthTotal();
   console.log(productToday);
   console.log(recDay);
@@ -34,8 +38,8 @@ if (recDay.getDate() != today.getDate()) {
 
   document.querySelector('.js-login-yes-button').addEventListener('click', () => {
     console.log('you have entered Money Tracker');
-    document.querySelector('.js-login-body-div').classList.add('hide-login-body-div');
-    document.querySelector('.js-main-body-div').classList.remove('hide-main-body-div');
+    document.querySelector('.js-login-body-div').classList.add('hidden');
+    document.querySelector('.js-main-body-div').classList.remove('hidden');
     console.log(recDay);
     localStorage.setItem('recDay', today.toISOString());
     try {
@@ -51,7 +55,7 @@ if (recDay.getDate() != today.getDate()) {
   });
   
 } else {
-  document.querySelector('.js-login-body-div').classList.add('hide-login-body-div');
+  document.querySelector('.js-login-body-div').classList.add('hidden');
   localStorage.setItem('recDay', today.toISOString());
   console.log(recDay);
   console.log(today);
