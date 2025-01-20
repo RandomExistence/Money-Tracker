@@ -100,14 +100,14 @@ body {
   font-size: 12px;
   padding: 2px 5px;
   border: solid;
-  border-color: rgb(151, 127, 109);
-  background-color: rgb(151, 127, 109);
+  border-color: rgb(84, 74, 67);
+  background-color: rgb(84, 74, 67);
   transition: 100ms;
 }
 .login-view-history-button:hover {
   color: white;
-  border-color: rgb(84, 74, 67);
-  background-color: rgb(84, 74, 67);
+  border-color: rgb(151, 127, 109);
+  background-color: rgb(151, 127, 109);
 }
 .login-view-history-button:active {
   transition: 50ms;
@@ -120,5 +120,14 @@ body {
 
 .view-history-button {
   margin-top: 50px;
+}
+
+.confirm-reset {
+  font-size: 12px;
+}
+.confirm-button {
+  font-size: 12px;
+  padding: 1px 4px;
+  margin-right: 4px;
 }
 
