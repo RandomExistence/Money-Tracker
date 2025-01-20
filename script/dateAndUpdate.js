@@ -1,22 +1,23 @@
-import { renderProductPriceGrid, renderTodayTotal, updateMonthMaxAndYesterday, renderMonthTotal, renderLoginMonthTotal, removeProductTodayArray, productToday } from "./spending.js";
+import { 
+  renderProductPriceGrid, renderTodayTotal, updateMonthMaxAndYesterday, 
+  renderMonthTotal, renderLoginMonthTotal, removeProductTodayArray, 
+  productToday, setUpButton
+} from "./spending.js";
 import { formatDate } from "./utils/dateFormat.js";
 import { updateProductHistory } from "./history/arrayLogic.js"; 
 
 let today = new Date();
-let recDay = today;
+// brother, this is a fucking pointer, omfg
+// let recDay = today;
+let recDay = new Date();
 if (!localStorage.getItem('recDay')) {
   recDay.setDate(today.getDate() - 1);
-  console.log(`this is today ${today}`);
 } else {
   recDay = new Date(localStorage.getItem('recDay'));
 }
 
-document.querySelector('.js-view-history-button').addEventListener('click', () => {
-  window.location.href = 'history.html';
-});
-document.querySelector('.js-login-view-history-button').addEventListener('click', () => {
-  window.location.href = 'history.html';
-});
+setUpButton();
+
 
 if (recDay.getMonth() != today.getMonth()) {
   alert('new month');
@@ -32,6 +33,7 @@ if (recDay.getDate() != today.getDate()) {
   renderLoginMonthTotal();
   console.log(productToday);
   console.log(recDay);
+  console.log(today);
   document.querySelector('.js-login-date-record').innerHTML = `
     ${formatDate(recDay)}
   `
