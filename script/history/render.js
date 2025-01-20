@@ -4,10 +4,12 @@ function renderHistory() {
   console.log('renderHistory is called');
   console.log(document);
   let historyMainHTML = '';
+
+  console.log(productHistory);
   
   productHistory.forEach((monthHistory, index) => {
     historyMainHTML += `
-      <button class="expand-button js-expand-button js-expand-button-${index}" data-index="${index}">+</button>
+      <button class="expand-button js-expand-button js-expand-button-${index}" data-index="${index}">𝚒</button>
       <div class="record-date">${monthHistory.date}</div>
       <div class="record-value">${monthHistory.totalPrice} / ${monthHistory.maxPrice}</div>
       <div class="expand-month-history hidden js-expand-month-history-${index}" data-rendered="false"></div>
@@ -38,7 +40,7 @@ function toggleHistoryExpand(index) {
       <div class="history-expand-header-product">Product Name</div>
       <div class="history-expand-header-price">Price</div>
     `;
-    if (productHistory[index].thisMonthHistory.length == 0) {
+    if (productHistory[index].thisMonthHistory.length == 1) {
       gridHistory += `
         <div>No Product Recorded</div>
         <div></div>
@@ -46,16 +48,20 @@ function toggleHistoryExpand(index) {
     }
 
     productHistory[index].thisMonthHistory.forEach((product) => {
-      gridHistory += `
-        <div>${product.name}</div>
-        <div>${product.price}</div>
-      `;
+      if (product.name === "" && product.price === 0) {
+        gridHistory += `
+          <div class="horizontal-line-div"></div>
+          <div></div>
+        `;
+      }
+      else {
+        gridHistory += `
+          <div>${product.name}</div>
+          <div>${product.price}</div>
+        `;
+      }
     });
 
-    gridHistory += `
-      <div class="horizontal-line-div"></div>
-      <div></div>
-    `;
     console.log("render");
     thisGrid.innerHTML = gridHistory;
     thisGrid.dataset.rendered = "true";
@@ -65,13 +71,12 @@ function toggleHistoryExpand(index) {
 
 function renderExpandButton(index) {
   const thisButton = document.querySelector(`.js-expand-button-${index}`);
-  if (thisButton.innerHTML == '+') {
+  if (thisButton.innerHTML == '𝚒') {
     thisButton.innerHTML = '-';
   } else {
-    thisButton.innerHTML = '+';
+    thisButton.innerHTML = '𝚒';
   }
 }
-
 
 renderHistory();
 

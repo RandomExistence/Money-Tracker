@@ -1,48 +1,20 @@
 import { productToday ,  dailyEarn } from "../spending.js";
+import { formatMonth } from "../utils/dateFormat.js";
 
 // would be nice if we could make it a class, you know to make it more concise
-export let productHistory = JSON.parse(localStorage.getItem('productHistory')) || [
-  {
-    date: 'Jan 2025',
+export let productHistory = JSON.parse(localStorage.getItem('productHistory')) || [];
+if (productHistory.length === 0) {
+  let today = new Date();
+  productHistory.push({
+    date: `${formatMonth(today)}`,
     totalPrice: 0,
     maxPrice: 0,
     thisMonthHistory: []
-  },
-  {
-    date: 'Dec 2024',
-    totalPrice: 30,
-    maxPrice: 100,
-    thisMonthHistory: [
-      {
-        name: 'fish',
-        price: 20
-      },
-      {
-        name: 'eraser',
-        price: 10
-      }
-    ]
-  },
-  {
-    date: 'Nov 2024',
-    totalPrice: 40,
-    maxPrice: 120,
-    thisMonthHistory: [
-      {
-        name: 'fish',
-        price: 20
-      },
-      {
-        name: 'pencil case of great glitter',
-        price: 20
-      }
-    ]
-  },
-];
+  })
+}
 
 // not new month, the first element is of our concern
 export function updateProductHistory() {
-  console.log('hello again');
   let yesterdayTotal = 0;
   productToday.forEach((product) => {
     productHistory[0].thisMonthHistory.push({
@@ -51,14 +23,30 @@ export function updateProductHistory() {
     });
     yesterdayTotal += product.price;
   });
+
+  productHistory[0].thisMonthHistory.push({
+    name: "",
+    price: 0
+  });
   productHistory[0].totalPrice += yesterdayTotal;
   productHistory[0].maxPrice += dailyEarn;
   localStorage.setItem('productHistory', JSON.stringify(productHistory));
+
 }
 
 // new month
 export function appendProductHistory() {
+  let today = new Date();
+  productHistory.unshift({
+    date: `${formatMonth(today)}`,
+    totalPrice: 0,
+    maxPrice: 0,
+    thisMonthHistory: []
+  });
 
+  if (productHistory.length > 12) {
+    productHistory.splice(12);
+  }
 }
 
 
