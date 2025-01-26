@@ -8,19 +8,19 @@
 </head>
 <body>
   <h1>Money Tracker</h1>
-  <h3 class="display-date js-display-date">date</h3>
+  <h3 class="display-date js-display-date"></h3>
 
-  <div class="login-body-div js-login-body-div">
+  <div class="login-body-div hidden js-login-body-div">
     <div class="login-div">Do you wish to enter Money Tracker today?</div>
     <div class="daily-earn-div js-daily-earn-div"></div>
     <div>Month Total last record: </div>
     <div class="total-login-month js-total-login-month">430 / 2600</div>
-    <div class="login-date-record js-login-date-record">31 Dec 2025</div>
+    <div class="last-login-day js-last-login-day">31 Dec 2025</div>
     <button class="main-button js-login-yes-button">Yes</button>
     <button class="login-view-history-button js-login-view-history-button">No (View History)</button>
   </div>
 
-  <div class="js-main-body-div">
+  <div class="js-main-body-div hidden">
     <div class="total-money-div js-total-money-div">
       <div class="month-total">Month Total: </div>
       <div class="month-total-value js-month-total-value">430 / 2600</div>
@@ -41,7 +41,6 @@
     <button class="confirm-button hidden js-confirm-no-button js-reset-element">no</button>
     <button class="confirm-button hidden js-confirm-yes-button js-reset-element">yes</button>
   </div>
-  <script type="module" src="script/dateAndUpdate.js"></script>
-  <script type="module" src="script/spending.js"></script>
+  <script type="module" src="script/mainPage/userHandler.js"></script>
 </body>
 </html>

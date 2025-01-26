@@ -1,4 +1,4 @@
-import { productHistory } from "./arrayLogic.js";
+import { productHistory } from "./historyLogic.js";
 
 function renderHistory() {
   console.log('renderHistory is called');
@@ -40,7 +40,7 @@ function toggleHistoryExpand(index) {
       <div class="history-expand-header-product">Product Name</div>
       <div class="history-expand-header-price">Price</div>
     `;
-    if (productHistory[index].thisMonthHistory.length == 1) {
+    if (productHistory[index].thisMonthHistory.length == 0) {
       gridHistory += `
         <div>No Product Recorded</div>
         <div></div>

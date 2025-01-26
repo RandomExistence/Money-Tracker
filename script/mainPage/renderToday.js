@@ -1,7 +1,9 @@
-export let dailyEarn = 250;
-export let productToday = JSON.parse(localStorage.getItem('productToday')) || [];
-export let yesterdayMonthTotal = JSON.parse(localStorage.getItem('yesterdayMonthTotal')) || 0;
-export let monthMaxTotal = JSON.parse(localStorage.getItem('monthMaxTotal')) || 0;
+import { 
+  productToday, addProductToArray, removeProductFromArray, updateProductArray,
+  dailyEarn, yesterdayMonthTotal, monthMaxTotal
+} from "./moneyLogic.js";
+import { today } from "./dateTimeLogic.js";
+import { formatDate } from "../utils/dateFormat.js"
 
 export function renderProductPriceGrid() {
   let gridHTML = ``;
@@ -24,7 +26,7 @@ export function renderProductPriceGrid() {
   document.querySelector('.js-add-button').addEventListener('click', () => {
     const product = document.querySelector('.js-add-product-input').value;
     const price = Number(document.querySelector('.js-add-price-input').value);
-    if (!price || !product) {
+    if ( price < 0 || !price || !product) {
       alert(`Fill in both product and price with valid values`);
     } else {
       addProductToArray(product, price);
@@ -78,28 +80,20 @@ export function renderProductPriceGrid() {
   });
 }
 
+export function renderTodayTotal() {
+  let total = 0;
+  productToday.forEach((product) => {
+    total += product.price;
+  });
 
-function updateProductArray(index, changedProduct, changedPrice) {
-  productToday[index].name = changedProduct;
-  productToday[index].price = changedPrice;
-  localStorage.setItem('productToday', JSON.stringify(productToday));
-}
-
-function removeProductFromArray(index) {
-  productToday.splice(index, 1);
-  localStorage.setItem('productToday', JSON.stringify(productToday));
-}
-
-function addProductToArray(product, price) {
- productToday.push(
-  {
-    name: product,
-    price: price
+  document.querySelector('.js-today-total-value').innerHTML = `
+    <span class="js-today-total-span">${total}</span> / ${dailyEarn}
+    <div class="tomorrow-daily-earn">(tmr. +${dailyEarn}) </div>
+  `;
+  if (total > dailyEarn) {
+    document.querySelector('.js-today-total-span').classList.add('today-total-exceed-span');
   }
- );
- localStorage.setItem('productToday', JSON.stringify(productToday));
 }
-
 
 export function renderMonthTotal() {
   /*
@@ -119,86 +113,17 @@ export function renderMonthTotal() {
 }
 
 export function renderLoginMonthTotal() {
-  let yesterdayTotal = 0;
-  productToday.forEach((product) => {
-    yesterdayTotal += product.price;
-  });
-  const currentMonthTotal = yesterdayMonthTotal + yesterdayTotal;
   document.querySelector('.js-total-login-month').innerHTML = `
-     ${currentMonthTotal} / ${monthMaxTotal}
+     ${yesterdayMonthTotal} / ${monthMaxTotal}
   `
   document.querySelector('.js-daily-earn-div').innerHTML = `
     You will be given ${dailyEarn} Baht
   `
 }
 
-export function updateMonthMaxAndYesterday() {
-  monthMaxTotal += dailyEarn;
-  localStorage.setItem('monthMaxTotal', JSON.stringify(monthMaxTotal));
-  let yesterdayTotal = 0;
-  productToday.forEach((product) => {
-    yesterdayTotal += product.price;
-  });
-  const currentMonthTotal = yesterdayMonthTotal + yesterdayTotal;
-  yesterdayMonthTotal = currentMonthTotal; // since today is 0, they are the same
-  localStorage.setItem('yesterdayMonthTotal', JSON.stringify(currentMonthTotal));
-}
-
-export function removeProductTodayArray() {
-  localStorage.removeItem('productToday');
-  productToday = [];
-}
-
-export function renderTodayTotal() {
-  let total = 0;
-  productToday.forEach((product) => {
-    total += product.price;
-  });
-
-  document.querySelector('.js-today-total-value').innerHTML = `
-    <span class="js-today-total-span">${total}</span> / ${dailyEarn}
-    <div class="tomorrow-daily-earn">(tmr. +${dailyEarn}) </div>
+export function renderDisplayDate() {
+  document.querySelector('.js-display-date').innerHTML = `
+    ${formatDate(today)}
   `;
-  if (total > dailyEarn) {
-    document.querySelector('.js-today-total-span').classList.add('today-total-exceed-span');
-  }
 }
 
-export function setUpButton() {
-
-  document.querySelector('.js-view-history-button').addEventListener('click', () => {
-    window.location.href = 'history.html';
-  });
-  document.querySelector('.js-login-view-history-button').addEventListener('click', () => {
-    window.location.href = 'history.html';
-  });
-
-  document.querySelector('.js-reset-button').addEventListener('click', () => {
-    document.querySelectorAll('.js-reset-element').forEach((element) => {
-      if (element.classList.contains('hidden')) {
-        element.classList.remove('hidden');
-      }
-      else {
-        element.classList.add('hidden');
-      }
-    });
-  });
-
-  document.querySelector('.js-confirm-yes-button').addEventListener('click', ()=> {
-    alert('your information has been reset. Page will reload');
-    resetInformation();
-  });
-
-  document.querySelector('.js-confirm-no-button').addEventListener('click', ()=> {
-    document.querySelectorAll('.js-reset-element').forEach((element) => {
-        element.classList.add('hidden');
-    });
-  });
-
-
-}
-
-export function resetInformation() {
-  localStorage.clear();
-  window.location.href = 'index.html';
-}

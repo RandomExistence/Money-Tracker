@@ -1,4 +1,4 @@
-import { productToday ,  dailyEarn } from "../spending.js";
+import { productToday ,  dailyEarn } from "../mainPage/moneyLogic.js";
 import { formatMonth } from "../utils/dateFormat.js";
 
 // would be nice if we could make it a class, you know to make it more concise
@@ -13,8 +13,9 @@ if (productHistory.length === 0) {
   })
 }
 
+// update maxPrice totalPrice and the productHistory array
 // not new month, the first element is of our concern
-export function updateProductHistory() {
+export function transferProductTodayToProductHistory() {
   let yesterdayTotal = 0;
   productToday.forEach((product) => {
     productHistory[0].thisMonthHistory.push({
@@ -24,14 +25,19 @@ export function updateProductHistory() {
     yesterdayTotal += product.price;
   });
 
-  productHistory[0].thisMonthHistory.push({
-    name: "",
-    price: 0
-  });
+  // if you bought something yesterday, put in a line
+  if (productToday.length != 0) {
+    productHistory[0].thisMonthHistory.push({
+      name: "",
+      price: 0
+    });
+  }
   productHistory[0].totalPrice += yesterdayTotal;
-  productHistory[0].maxPrice += dailyEarn;
   localStorage.setItem('productHistory', JSON.stringify(productHistory));
+}
 
+export function addProductHistoryMaxPrice() {
+  productHistory[0].maxPrice += dailyEarn;
 }
 
 // new month
