@@ -13,8 +13,3 @@ This is my side project for practicing html, css and js. Also for fun and my own
 Possible implementations :
 1. perhaps I should categorize products, and history will display total of each category instead of all products.
    If I choose to implement this, I will also add a dropdown on each product in the grid. I may even make it auto choose.
-
-Will implement :
-1. a way to change daily allowance (rn dunno where I should place the button)
-2. a feature that automatically fill grid on each day.
-3. hotkeys for grid (can't wait to accidentally write blocking codes)
