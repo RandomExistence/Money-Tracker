@@ -5,12 +5,14 @@ export let lastLoginDay = new Date();
 // set up recDay
 if (!localStorage.getItem('recDay')) {
   recDay.setDate(today.getDate() - 1);
+  localStorage.setItem('recDay', recDay.toISOString());
 } else {
   recDay = new Date(localStorage.getItem('recDay'));
 }
 // set up lastLoginDay
 if (!localStorage.getItem('lastLoginDay')) {
   lastLoginDay.setDate(today.getDate() - 1);
+  localStorage.setItem('lastLoginDay', lastLoginDay.toISOString());
 } else {
   lastLoginDay = new Date(localStorage.getItem('lastLoginDay'));
 }
