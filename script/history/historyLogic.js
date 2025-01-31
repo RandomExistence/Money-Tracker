@@ -38,6 +38,7 @@ export function transferProductTodayToProductHistory() {
 
 export function addProductHistoryMaxPrice() {
   productHistory[0].maxPrice += dailyEarn;
+  localStorage.setItem('productHistory', JSON.stringify(productHistory));
 }
 
 // new month
