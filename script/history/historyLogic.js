@@ -52,7 +52,7 @@ export function appendProductHistory() {
   });
 
   if (productHistory.length > 12) {
-    productHistory.splice(12);
+    productHistory.splice(0,12);
   }
 }
 
